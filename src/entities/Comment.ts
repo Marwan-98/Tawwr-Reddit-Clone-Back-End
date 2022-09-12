@@ -13,7 +13,7 @@ import User from "./User";
 @Entity()
 class Comments extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: Number;
+  id: number;
 
   @Column({
     nullable: false,

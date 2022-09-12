@@ -6,9 +6,9 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const user = await User.find({ relations: { posts: { comments: true } } });
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
-    throw err;
+    return res.status(500).json(err);
   }
 });
 
@@ -22,9 +22,9 @@ router.get("/:id", async (req, res) => {
       return res
         .status(404)
         .json({ message: `No user with the id:${id} was found` });
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
-    throw err;
+    return res.status(500).json(err);
   }
 });
 
@@ -39,9 +39,9 @@ router.post("/new", async (req, res) => {
     });
 
     await user.save();
-    res.json({ user });
+    res.status(200).json({ user });
   } catch (err) {
-    throw err;
+    return res.status(500).json(err);
   }
 });
 
@@ -49,9 +49,9 @@ router.delete("/:id/delete", async (req, res) => {
   try {
     const userId = +req.params.id;
     const deleted = await User.delete(userId);
-    return res.json(deleted);
+    return res.status(400).json(deleted);
   } catch (err) {
-    throw err;
+    return res.status(500).json(err);
   }
 });
 

@@ -22,9 +22,6 @@ class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  userId: number;
-
   @Column({
     nullable: false,
   })
@@ -48,7 +45,6 @@ class Post extends BaseEntity {
     nullable: false,
     onDelete: "CASCADE",
   })
-  @JoinColumn({ name: "userId" })
   user: User;
 
   @OneToMany(() => Comments, (comments) => comments.post)
